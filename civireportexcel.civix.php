@@ -96,10 +96,10 @@ function _civireportexcel_civix_civicrm_upgrade($op, CRM_Queue_Queue $queue = NU
 }
 
 function _civireportexcel_civix_upgrader() {
-  if (!file_exists(__DIR__.'/CRM/Civireportexcel/Upgrader.php')) {
+  if (!file_exists(__DIR__.'/CRM/CiviReportExcel/Upgrader.php')) {
     return NULL;
   } else {
-    return CRM_Civireportexcel_Upgrader_Base::instance();
+    return CRM_CiviReportExcel_Upgrader_Base::instance();
   }
 }
 
