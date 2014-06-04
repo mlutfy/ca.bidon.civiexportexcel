@@ -1,0 +1,74 @@
+diff --git a/CRM/Report/Form.php b/CRM/Report/Form.php
+index 055e0d9..358e6ee 100644
+--- a/CRM/Report/Form.php
++++ b/CRM/Report/Form.php
+@@ -185,6 +185,7 @@ class CRM_Report_Form extends CRM_Core_Form {
+   protected $_printButtonName = NULL;
+   protected $_pdfButtonName = NULL;
+   protected $_csvButtonName = NULL;
++  protected $_excelButtonName = NULL;
+   protected $_groupButtonName = NULL;
+   protected $_chartButtonName = NULL;
+   protected $_csvSupported = TRUE;
+@@ -446,6 +447,7 @@ class CRM_Report_Form extends CRM_Core_Form {
+     $this->_printButtonName = $this->getButtonName('submit', 'print');
+     $this->_pdfButtonName = $this->getButtonName('submit', 'pdf');
+     $this->_csvButtonName = $this->getButtonName('submit', 'csv');
++    $this->_excelButtonName = $this->getButtonName('submit', 'excel');
+     $this->_groupButtonName = $this->getButtonName('submit', 'group');
+     $this->_chartButtonName = $this->getButtonName('submit', 'chart');
+   }
+@@ -1075,6 +1077,9 @@ class CRM_Report_Form extends CRM_Core_Form {
+       $this->addElement('submit', $this->_csvButtonName, $label);
+     }
+ 
++    $label = $this->_id ? ts('Excel (test)') : ts('Preview Excel');
++    $this->addElement('submit', $this->_excelButtonName, $label);
++
+     if (CRM_Core_Permission::check('administer Reports') && $this->_add2groupSupported) {
+       $this->addElement('select', 'groups', ts('Group'),
+         array('' => ts('- select group -')) + CRM_Core_PseudoConstant::staticGroup()
+@@ -2094,6 +2099,13 @@ WHERE cg.extends IN ('" . implode("','", $this->_customGroupExtends) . "') AND
+       $this->_outputMode = 'csv';
+       $this->_absoluteUrl = TRUE;
+     }
++    elseif ($this->_excelButtonName == $buttonName || $output == 'excel2007') {
++      $this->assign('printOnly', TRUE);
++      $printOnly = TRUE;
++      $this->assign('outputMode', 'excel2007');
++      $this->_outputMode = 'excel2007';
++      $this->_absoluteUrl = TRUE;
++    }
+     elseif ($this->_groupButtonName == $buttonName || $output == 'group') {
+       $this->assign('outputMode', 'group');
+       $this->_outputMode = 'group';
+@@ -2610,6 +2622,9 @@ WHERE cg.extends IN ('" . implode("','", $this->_customGroupExtends) . "') AND
+     elseif ($this->_outputMode == 'csv') {
+       CRM_Report_Utils_Report::export2csv($this, $rows);
+     }
++    elseif ($this->_outputMode == 'excel2007') {
++      CRM_CiviReportExcel_Utils_Report::export2excel2007($this, $rows);
++    }
+     elseif ($this->_outputMode == 'group') {
+       $group = $this->_params['groups'];
+       $this->add2group($group);
+diff --git a/templates/CRM/Report/Form/Actions.tpl b/templates/CRM/Report/Form/Actions.tpl
+index d4aa43f..32344ba 100644
+--- a/templates/CRM/Report/Form/Actions.tpl
++++ b/templates/CRM/Report/Form/Actions.tpl
+@@ -31,6 +31,7 @@
+         {assign var=print value="_qf_"|cat:$form.formName|cat:"_submit_print"}
+         {assign var=pdf   value="_qf_"|cat:$form.formName|cat:"_submit_pdf"}
+         {assign var=csv   value="_qf_"|cat:$form.formName|cat:"_submit_csv"}
++        {assign var=excel value="_qf_"|cat:$form.formName|cat:"_submit_excel"}
+         {assign var=group value="_qf_"|cat:$form.formName|cat:"_submit_group"}
+         {assign var=chart value="_qf_"|cat:$form.formName|cat:"_submit_chart"}
+         <table style="border:0;">
+@@ -41,6 +42,7 @@
+                             <td>{$form.$print.html}&nbsp;&nbsp;</td>
+                             <td>{$form.$pdf.html}&nbsp;&nbsp;</td>
+                             <td>{$form.$csv.html}&nbsp;&nbsp;</td>
++                            <td>{$form.$excel.html}&nbsp;&nbsp;</td>
+                             {if $instanceUrl}
+                                 <td>&nbsp;&nbsp;&raquo;&nbsp;<a href="{$instanceUrl}">{ts}Existing report(s) from this template{/ts}</a></td>
+                             {/if}
