@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package civireportexcel
+ * @package civiexportexcel
  * @copyright Mathieu Lutfy (c) 2014
  */
 class CRM_CiviExportExcel_Utils_Report {
