@@ -6,10 +6,11 @@ Experimental extension!
 This extension adds the possibility to export directly into the MS Excel
 format from CiviReports, instead of CSV (less fiddling, easier to use).
 
-See the "Todo" section below for an idea of the features this extension
-aims to implement.
+This extension uses the PHPExcel library. See the "License" section below
+for more information.
 
 For discussion, see: http://forum.civicrm.org/index.php/topic,32954.0.html
+See also the "Todo" section for a general roadmap.
 
 To download the latest version of this module:
 https://github.com/mlutfy/ca.bidon.civireportexcel
@@ -67,3 +68,9 @@ License
 
 Distributed under the terms of the GNU Affero General public license (AGPL).
 See LICENSE.txt for details.
+
+This extension includes PHPExcel:
+
+Version 1.8.0, 2014-03-02
+Copyright (c) 2006 - 2013 PHPExcel (http://www.codeplex.com/PHPExcel)
+http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
