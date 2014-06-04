@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<extension key="ca.bidon.civireportexcel" type="module">
-  <file>civireportexcel</file>
-  <name>CiviCRM Reports Export to Excel</name>
-  <description>Adds the possibility to export CiviCRM reports to Excel</description>
+<extension key="ca.bidon.civiexportexcel" type="module">
+  <file>civiexportexcel</file>
+  <name>CiviCRM Export to Excel</name>
+  <description>Adds the possibility to export directly to Excel from CiviCRM.</description>
   <license>AGPL3</license>
   <maintainer>
     <author>Mathieu Lutfy</author>
@@ -14,8 +14,8 @@
   <compatibility>
     <ver>4.4</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
+  <comments>See the README.md file.</comments>
   <civix>
-    <namespace>CRM/CiviReportExcel</namespace>
+    <namespace>CRM/CiviExportExcel</namespace>
   </civix>
 </extension>

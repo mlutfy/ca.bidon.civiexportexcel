@@ -1,5 +1,5 @@
-CiviCRM Reports export to Excel
-===============================
+CiviCRM export to Excel
+=======================
 
 Experimental extension!
 
@@ -13,7 +13,7 @@ For discussion, see: http://forum.civicrm.org/index.php/topic,32954.0.html
 See also the "Todo" section for a general roadmap.
 
 To download the latest version of this module:
-https://github.com/mlutfy/ca.bidon.civireportexcel
+https://github.com/mlutfy/ca.bidon.civiexportexcel
 
 Requirements
 ============
@@ -31,14 +31,14 @@ Installation
 2- Enable the extension from CiviCRM -> Administer -> System -> Extensions.
 
 3- Apply a patch to CiviCRM core, otherwise the "Export to Excel" button will
-   not be available from CiviReports. See file: civireportexcel-core.patch
+   not be available from CiviReports. See file: civiexportexcel-core.patch
    included in the main directory of this extension.
 
 Support
 =======
 
 Please post bug reports in the issue tracker of this project on github:
-https://github.com/mlutfy/ca.bidon.civireportexcel/issues
+https://github.com/mlutfy/ca.bidon.civiexportexcel/issues
 
 This is a community contributed extension written thanks to the financial
 support of organisations using it, as well as the very helpful and collaborative

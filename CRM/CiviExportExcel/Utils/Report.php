@@ -4,7 +4,7 @@
  * @package civireportexcel
  * @copyright Mathieu Lutfy (c) 2014
  */
-class CRM_CiviReportExcel_Utils_Report {
+class CRM_CiviExportExcel_Utils_Report {
 
   /**
    * Generates a XLS 2007 file and forces the browser to download it.

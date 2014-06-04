@@ -47,7 +47,7 @@ index 055e0d9..358e6ee 100644
        CRM_Report_Utils_Report::export2csv($this, $rows);
      }
 +    elseif ($this->_outputMode == 'excel2007') {
-+      CRM_CiviReportExcel_Utils_Report::export2excel2007($this, $rows);
++      CRM_CiviExportExcel_Utils_Report::export2excel2007($this, $rows);
 +    }
      elseif ($this->_outputMode == 'group') {
        $group = $this->_params['groups'];
