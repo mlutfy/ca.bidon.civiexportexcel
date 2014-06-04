@@ -31,7 +31,8 @@ Installation
 2- Enable the extension from CiviCRM -> Administer -> System -> Extensions.
 
 3- Apply a patch to CiviCRM core, otherwise the "Export to Excel" button will
-   not be available from CiviReports. TODO: document the patch.
+   not be available from CiviReports. See file: civireportexcel-core.patch
+   included in the main directory of this extension.
 
 Support
 =======
