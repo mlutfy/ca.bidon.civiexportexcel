@@ -53,7 +53,10 @@ http://civicrm.org/participate/support-civicrm
 While I do my best to provide volunteer support for this extension, please
 consider financially contributing to support or development of this extension
 if you can.
-http://www.bidon.ca/en/paypal
+
+Commercial support via Coop SymbioTIC: <https://www.symbiotic.coop>
+
+Or you can send me the equivalent of a beer: <https://www.bidon.ca/en/paypal>
 
 Todo
 ====
@@ -61,7 +64,6 @@ Todo
 * Support report e-mails (return the output of the xls, do not output directly as download).
 * Propose a new hook to CiviCRM so that we do not need to patch core.
 * Apply new hook to Search export as well (in the "select fields" step, add a "format" option that calls the hook?)
-* Add column headers in xls export.
 * Add OpenDocument (LibreOffice) support.
 * Add admin settings form to enable excel/opendocument formats?
 
