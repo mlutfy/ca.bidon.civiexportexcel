@@ -15,6 +15,9 @@ See also the "Todo" section for a general roadmap.
 To download the latest version of this module:
 https://github.com/mlutfy/ca.bidon.civiexportexcel
 
+This extension was sponsored by: Projet Montréal <http://projetmontreal.org>
+and Development and Peace <http://www.devp.org>.
+
 Requirements
 ============
 
