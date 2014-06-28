@@ -109,7 +109,8 @@ class CRM_CiviExportExcel_Utils_Report {
           continue;
         }
 
-        if (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & 4) {
+        // Data transformation before adding it to the cell
+        if (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & CRM_Utils_Type::T_DATE) {
           $group_by = CRM_Utils_Array::value('group_by', $form->_columnHeaders[$v]);
 
           if ($group_by == 'MONTH' || $group_by == 'QUARTER') {
@@ -122,23 +123,26 @@ class CRM_CiviExportExcel_Utils_Report {
             $value = CRM_Utils_Date::customFormat($value, '%Y-%m-%d');
           }
         }
-        elseif (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) == 1024) {
-          $value = CRM_Utils_Money::format($value);
-        }
 
         $objPHPExcel->getActiveSheet()
           ->setCellValue($cells[$col] . $cpt, $value);
 
-        if (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & 4) {
+        // Cell formats
+        if (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & CRM_Utils_Type::T_DATE) {
           $objPHPExcel->getActiveSheet()
             ->getStyle($cells[$col] . $cpt)
             ->getNumberFormat()
-            ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDDSLASH);
+            ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_YYYYMMDD);
 
           // Set autosize on date columns. 
           // We only do it for dates because we know they have a fixed width, unlike strings.
           // For eco-friendlyness, this should only be done once, perhaps when processing the headers initially
           $objPHPExcel->getActiveSheet()->getColumnDimension($cells[$col])->setAutoSize(true);
+        }
+        elseif (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & CRM_Utils_Type::T_MONEY) {
+          $objPHPExcel->getActiveSheet()->getStyle($cells[$col])
+            ->getNumberFormat()
+            ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_GENERAL);
         }
 
         $col++;
