@@ -73,21 +73,29 @@ class CRM_CiviExportExcel_Utils_Report {
     $sheet = $objPHPExcel->setActiveSheetIndex(0);
     $objPHPExcel->getActiveSheet()->setTitle('Report');
 
-    $cpt = 1;
-    $cell = 0; // starts at A1 using $cells
-
     // Add headers if this is the first row.
     $columnHeaders = array_keys($form->_columnHeaders);
 
     // Replace internal header names with friendly ones, where available.
     foreach ($columnHeaders as $header) {
       if (isset($form->_columnHeaders[$header])) {
-        $headers[] = '"' . html_entity_decode(strip_tags($form->_columnHeaders[$header]['title'])) . '"';
+        $headers[] = html_entity_decode(strip_tags($form->_columnHeaders[$header]['title']));
       }
     }
 
-    // Add the headers. FIXME
-    // $csv .= implode($config->fieldSeparator, $headers) . "\r\n";
+    // Add the column headers.
+    $col = 0;
+    $cpt = 1;
+
+    foreach ($headers as $h) {
+      $objPHPExcel->getActiveSheet()
+        ->setCellValue($cells[$col] . $cpt, $h);
+
+      $col++;
+    }
+
+    // Add rows.
+    $cpt = 2;
 
     foreach ($rows as $row) {
       $displayRows = array();
