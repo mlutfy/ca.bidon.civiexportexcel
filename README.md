@@ -1,13 +1,11 @@
 CiviCRM export to Excel
 =======================
 
-Experimental extension!
-
 This extension adds the possibility to export directly into the MS Excel
 format from CiviReports, instead of CSV (less fiddling, easier to use).
 
 This extension uses the PHPExcel library. See the "License" section below
-for more information.
+for more information (LGPL v2).
 
 For discussion, see: http://forum.civicrm.org/index.php/topic,32954.0.html
 See also the "Todo" section for a general roadmap.
@@ -22,10 +20,11 @@ Requirements
 ============
 
 - CiviCRM >= 4.4 (previous versions untested)
-- patching CiviCRM core code.
 
 Installation
 ============
+
+Install as any other regular CiviCRM extension:
 
 1- Download this extension and unpack it in your 'extensions' directory.
    You may need to create it if it does not already exist, and configure
@@ -33,15 +32,14 @@ Installation
 
 2- Enable the extension from CiviCRM -> Administer -> System -> Extensions.
 
-3- Apply a patch to CiviCRM core, otherwise the "Export to Excel" button will
-   not be available from CiviReports. See file: civiexportexcel-core.patch
-   included in the main directory of this extension.
-
 Support
 =======
 
 Please post bug reports in the issue tracker of this project on github:
 https://github.com/mlutfy/ca.bidon.civiexportexcel/issues
+
+For general questions and support, please post on the "Extensions" forum:
+http://forum.civicrm.org/index.php/board,57.0.html
 
 This is a community contributed extension written thanks to the financial
 support of organisations using it, as well as the very helpful and collaborative
@@ -62,7 +60,7 @@ Todo
 ====
 
 * Support report e-mails (return the output of the xls, do not output directly as download).
-* Propose a new hook to CiviCRM so that we do not need to patch core.
+* Propose a new hook to CiviCRM for a cleaner postProcess implementation.
 * Apply new hook to Search export as well (in the "select fields" step, add a "format" option that calls the hook?)
 * Add OpenDocument (LibreOffice) support.
 * Add admin settings form to enable excel/opendocument formats?

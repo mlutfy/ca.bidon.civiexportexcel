@@ -68,3 +68,63 @@ function civiexportexcel_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
 function civiexportexcel_civicrm_managed(&$entities) {
   return _civiexportexcel_civix_civicrm_managed($entities);
 }
+
+/**
+ * Implementation of hook_civicrm_buildForm().
+ *
+ * Used to add a 'Export to Excel' button in the Report forms.
+ */
+function civiexportexcel_civicrm_buildForm($formName, &$form) {
+  // Reports extend the CRM_Report_Form class.
+  // We use that to check whether we should inject the Excel export buttons.
+  if (is_subclass_of($form, 'CRM_Report_Form')) {
+    $smarty = CRM_Core_Smarty::singleton();
+    $vars = $smarty->get_template_vars();
+
+    $form->_excelButtonName = $form->getButtonName('submit', 'excel');
+
+    $label = (! empty($vars['instanceId']) ? ts('Export to Excel') : ts('Preview Excel'));
+    $form->addElement('submit', $form->_excelButtonName, $label);
+
+    CRM_Core_Region::instance('page-body')->add(array(
+      'template' => 'CRM/Report/Form/Actions-civiexportexcel.tpl',
+    ));
+
+    // This hook also gets called when we click on a submit button,
+    // so we can handle that part here too.
+    $buttonName = $form->controller->getButtonName();
+
+    $output = CRM_Utils_Request::retrieve('output', 'String', CRM_Core_DAO::$_nullObject);
+
+    if ($form->_excelButtonName == $buttonName || $output == 'excel2007') {
+      $form->assign('printOnly', TRUE);
+      $printOnly = TRUE;
+      $form->assign('outputMode', 'excel2007');
+      // $form->_absoluteUrl = TRUE;
+
+      // FIXME: this duplicates part of CRM_Report_Form::postProcess()
+      // since we do not have a place to hook into, we hi-jack the form process
+      // before it gets into postProcess.
+
+      // get ready with post process params
+      $form->beginPostProcess();
+
+      // build query
+      $sql = $form->buildQuery();
+
+      // build array of result based on column headers. This method also allows
+      // modifying column headers before using it to build result set i.e $rows.
+      $rows = array();
+      $form->buildRows($sql, $rows);
+
+      // format result set.
+      $form->formatDisplay($rows);
+
+      // assign variables to templates
+      $form->doTemplateAssignment($rows);
+      // FIXME: END.
+
+      CRM_CiviExportExcel_Utils_Report::export2excel2007($form, $rows);
+    }
+  }
+}
