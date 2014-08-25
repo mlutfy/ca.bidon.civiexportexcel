@@ -128,3 +128,28 @@ function civiexportexcel_civicrm_buildForm($formName, &$form) {
     }
   }
 }
+
+/**
+ * Implements hook_civicrm_export().
+ *
+ * Called mostly to export search results.
+ */
+function civiexportexcel_civicrm_export($exportTempTable, $headerRows, $sqlColumns, $exportMode) {
+  $writeHeader = true;
+
+  $rows = array();
+
+  $query = "SELECT * FROM $exportTempTable";
+  $dao = CRM_Core_DAO::executeQuery($query);
+
+  while ($dao->fetch()) {
+    $row = array();
+    foreach ($sqlColumns as $column => $dontCare) {
+      $row[$column] = $dao->$column;
+    }
+
+    $rows[] = $row;
+  }
+
+  CRM_CiviExportExcel_Utils_SearchExport::export2excel2007($headerRows, $sqlColumns, $rows);
+}
