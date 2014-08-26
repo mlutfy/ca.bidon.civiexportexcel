@@ -2,7 +2,8 @@ CiviCRM export to Excel
 =======================
 
 This extension adds the possibility to export directly into the MS Excel
-format from CiviReports, instead of CSV (less fiddling, easier to use).
+format from CiviReports and Search results, instead of CSV (less fiddling,
+easier to use).
 
 This extension uses the PHPExcel library. See the "License" section below
 for more information (LGPL v2).
@@ -61,7 +62,6 @@ Todo
 
 * Support report e-mails (return the output of the xls, do not output directly as download).
 * Propose a new hook to CiviCRM for a cleaner postProcess implementation.
-* Apply new hook to Search export as well (in the "select fields" step, add a "format" option that calls the hook?)
 * Add OpenDocument (LibreOffice) support.
 * Add admin settings form to enable excel/opendocument formats?
 
