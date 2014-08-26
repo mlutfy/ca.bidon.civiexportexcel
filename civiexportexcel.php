@@ -110,7 +110,7 @@ function civiexportexcel_civicrm_buildForm($formName, &$form) {
       $form->beginPostProcess();
 
       // build query
-      $sql = $form->buildQuery();
+      $sql = $form->buildQuery(FALSE);
 
       // build array of result based on column headers. This method also allows
       // modifying column headers before using it to build result set i.e $rows.
