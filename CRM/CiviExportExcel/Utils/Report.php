@@ -47,8 +47,10 @@ class CRM_CiviExportExcel_Utils_Report {
     $a = ord('A');
     $cells = array();
 
-    for ($i = 0; $i < 26; $i++) {
-      $cells[$i] = chr($i + $a);
+    for ($i = 0; $i < 4; $i++) {
+      for ($j = 0; $j < 26; $j++) {
+        $cells[$j + ($i * 26)] = $foo[$i] . chr($j + $a);
+      }
     }
 
     include('PHPExcel/Classes/PHPExcel.php');
