@@ -44,6 +44,7 @@ class CRM_CiviExportExcel_Utils_Report {
     $csv = '';
 
     // Generate an array with { 0=>A, 1=>B, 2=>C, ... }
+    $foo = array(0 => '', 1 => 'A', 2 => 'B', 3 => 'C');
     $a = ord('A');
     $cells = array();
 
