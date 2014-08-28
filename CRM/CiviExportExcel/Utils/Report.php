@@ -111,6 +111,9 @@ class CRM_CiviExportExcel_Utils_Report {
           continue;
         }
 
+        // Remove HTML, unencode entities
+        $value = html_entity_decode(strip_tags($value));
+
         // Data transformation before adding it to the cell
         if (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & CRM_Utils_Type::T_DATE) {
           $group_by = CRM_Utils_Array::value('group_by', $form->_columnHeaders[$v]);

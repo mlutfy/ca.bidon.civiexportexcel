@@ -104,6 +104,9 @@ class CRM_CiviExportExcel_Utils_SearchExport {
           continue;
         }
 
+        // Remove HTML, unencode entities
+        $value = html_entity_decode(strip_tags($value));
+
         $objPHPExcel->getActiveSheet()
           ->setCellValue($cells[$col] . $cpt, $value);
 
