@@ -9,7 +9,7 @@
     <email>mathieu@symbiotic.coop</email>
   </maintainer>
   <releaseDate>2014-08-26</releaseDate>
-  <version>1.3</version>
+  <version>1.4</version>
   <develStage>stable</develStage>
   <compatibility>
     <ver>4.4</ver>
