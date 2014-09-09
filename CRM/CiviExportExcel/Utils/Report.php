@@ -44,6 +44,7 @@ class CRM_CiviExportExcel_Utils_Report {
     $csv = '';
 
     // Generate an array with { 0=>A, 1=>B, 2=>C, ... }
+    $foo = array(0 => '', 1 => 'A', 2 => 'B', 3 => 'C');
     $a = ord('A');
     $cells = array();
 
@@ -110,6 +111,9 @@ class CRM_CiviExportExcel_Utils_Report {
           $col++;
           continue;
         }
+
+        // Remove HTML, unencode entities
+        $value = html_entity_decode(strip_tags($value));
 
         // Data transformation before adding it to the cell
         if (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & CRM_Utils_Type::T_DATE) {
