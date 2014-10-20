@@ -80,7 +80,7 @@ class CRM_CiviExportExcel_Utils_SearchExport {
         ->setCellValue($cells[$col] . $cpt, $h);
       }
       catch (Exception $e) {
-        die(print_r($h, 1));
+        die(print_r($e, 1));
       }
 
       $col++;
