@@ -44,11 +44,11 @@ class CRM_CiviExportExcel_Utils_Report {
     $csv = '';
 
     // Generate an array with { 0=>A, 1=>B, 2=>C, ... }
-    $foo = array(0 => '', 1 => 'A', 2 => 'B', 3 => 'C');
+    $foo = array(0 => '', 1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E');
     $a = ord('A');
     $cells = array();
 
-    for ($i = 0; $i < 4; $i++) {
+    for ($i = 0; $i < count($foo); $i++) {
       for ($j = 0; $j < 26; $j++) {
         $cells[$j + ($i * 26)] = $foo[$i] . chr($j + $a);
       }
