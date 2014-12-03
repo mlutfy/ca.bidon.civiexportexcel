@@ -42,11 +42,11 @@ class CRM_CiviExportExcel_Utils_SearchExport {
     $csv = '';
 
     // Generate an array with { 0=>A, 1=>B, 2=>C, ... }
-    $foo = array(0 => '', 1 => 'A', 2 => 'B', 3 => 'C');
+    $foo = array(0 => '', 1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E');
     $a = ord('A');
     $cells = array();
 
-    for ($i = 0; $i < 4; $i++) {
+    for ($i = 0; $i < count($foo); $i++) {
       for ($j = 0; $j < 26; $j++) {
         $cells[$j + ($i * 26)] = $foo[$i] . chr($j + $a);
       }
@@ -80,7 +80,7 @@ class CRM_CiviExportExcel_Utils_SearchExport {
         ->setCellValue($cells[$col] . $cpt, $h);
       }
       catch (Exception $e) {
-        die(print_r($h, 1));
+        die(print_r($e, 1));
       }
 
       $col++;
