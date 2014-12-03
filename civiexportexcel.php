@@ -151,5 +151,7 @@ function civiexportexcel_civicrm_export($exportTempTable, $headerRows, $sqlColum
     $rows[] = $row;
   }
 
+  $dao->free();
+
   CRM_CiviExportExcel_Utils_SearchExport::export2excel2007($headerRows, $sqlColumns, $rows);
 }
