@@ -47,26 +47,28 @@ the "Scheduled Jobs" settings.
 Support
 =======
 
-Please post bug reports in the issue tracker of this project on github:
+Please post bug reports in the issue tracker of this project on github:  
 https://github.com/mlutfy/ca.bidon.civiexportexcel/issues
 
-For general questions and support, please post on the "Extensions" forum:
+For general questions and support, please post on the "Extensions" forum:  
 http://forum.civicrm.org/index.php/board,57.0.html
 
 This is a community contributed extension written thanks to the financial
 support of organisations using it, as well as the very helpful and collaborative
 CiviCRM community.
 
-If you appreciate this module, please consider donating 10$ to the CiviCRM project:
+If you appreciate this module, please consider donating 10$ to the CiviCRM project:  
 http://civicrm.org/participate/support-civicrm
 
 While I do my best to provide volunteer support for this extension, please
 consider financially contributing to support or development of this extension
 if you can.
 
-Commercial support via Coop SymbioTIC: <https://www.symbiotic.coop>
+Commercial support via Coop SymbioTIC:  
+<https://www.symbiotic.coop>
 
-Or you can send me the equivalent of a beer: <https://www.bidon.ca/en/paypal>
+Or you can send me the equivalent of a beer:  
+<https://www.bidon.ca/en/paypal>
 
 Todo
 ====
@@ -74,6 +76,7 @@ Todo
 * Propose a new hook to CiviCRM for a cleaner postProcess implementation (incl. mail).
 * Add OpenDocument (LibreOffice) support.
 * Add admin settings form to enable excel/opendocument formats?
+* Compare performance with tinybutstrong/tbs library?
 
 License
 =======
