@@ -2,9 +2,9 @@
 
 /**
  * @package civiexportexcel
- * @copyright Mathieu Lutfy (c) 2014
+ * @copyright Mathieu Lutfy (c) 2014-2015
  */
-class CRM_CiviExportExcel_Utils_Report {
+class CRM_CiviExportExcel_Utils_Report extends CRM_Core_Page {
 
   /**
    * Generates a XLS 2007 file and forces the browser to download it.
@@ -27,7 +27,7 @@ class CRM_CiviExportExcel_Utils_Report {
     // always modified
     header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 
-    echo self::makeCsv($form, $rows);
+    self::generateFile($form, $rows);
     CRM_Utils_System::civiExit();
   }
 
@@ -35,11 +35,13 @@ class CRM_CiviExportExcel_Utils_Report {
    * Utility function for export2csv and CRM_Report_Form::endPostProcess
    * - make XLS file content and return as string.
    *
-   * FIXME: return as string, not output directly.
+   * @param Object &$form CRM_Report_Form object.
+   * @param Array &$rows Resulting rows from the report.
+   * @param String Full path to the filename to write in (for mailing reports).
    *
    * See @CRM_Report_Utils_Report::makeCsv().
    */
-  static function makeCsv(&$form, &$rows) {
+  static function generateFile(&$form, &$rows, $filename = 'php://output') {
     $config = CRM_Core_Config::singleton();
     $csv = '';
 
@@ -158,7 +160,7 @@ class CRM_CiviExportExcel_Utils_Report {
     }
 
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-    $objWriter->save('php://output');
+    $objWriter->save($filename);
 
     return ''; // FIXME
   }

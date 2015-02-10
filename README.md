@@ -8,14 +8,16 @@ easier to use).
 This extension uses the PHPExcel library. See the "License" section below
 for more information (LGPL v2).
 
-For discussion, see: http://forum.civicrm.org/index.php/topic,32954.0.html
+For discussion, see: http://forum.civicrm.org/index.php/topic,32954.0.html  
 See also the "Todo" section for a general roadmap.
 
-To download the latest version of this module:
+To download the latest version of this module:  
 https://github.com/mlutfy/ca.bidon.civiexportexcel
 
-This extension was sponsored by: Projet Montréal <http://projetmontreal.org>
-and Development and Peace <http://www.devp.org>.
+This extension was sponsored by:  
+Projet Montréal <http://projetmontreal.org>  
+Development and Peace <https://www.devp.org>  
+Coop SymbioTIC <https://www.symbiotic.coop>
 
 Requirements
 ============
@@ -32,6 +34,15 @@ Install as any other regular CiviCRM extension:
    the correct path in CiviCRM -> Administer -> System -> Directories.
 
 2- Enable the extension from CiviCRM -> Administer -> System -> Extensions.
+
+3- If you wish to send emails with the report as an Excel attachment,
+   you must apply the patch in civiexportexcel-core-mail.patch.
+
+Report mails
+============
+
+To send report e-mails in Excel2007 format, use: "format=excel2007" in
+the "Scheduled Jobs" settings.
 
 Support
 =======
@@ -60,15 +71,14 @@ Or you can send me the equivalent of a beer: <https://www.bidon.ca/en/paypal>
 Todo
 ====
 
-* Support report e-mails (return the output of the xls, do not output directly as download).
-* Propose a new hook to CiviCRM for a cleaner postProcess implementation.
+* Propose a new hook to CiviCRM for a cleaner postProcess implementation (incl. mail).
 * Add OpenDocument (LibreOffice) support.
 * Add admin settings form to enable excel/opendocument formats?
 
 License
 =======
 
-(C) 2014 Mathieu Lutfy <mathieu@bidon.ca>
+(C) 2014-2015 Mathieu Lutfy <mathieu@bidon.ca>
 
 Distributed under the terms of the GNU Affero General public license (AGPL).
 See LICENSE.txt for details.
