@@ -111,7 +111,7 @@ class CRM_CiviExportExcel_Utils_SearchExport {
           ->setCellValue($cells[$col] . $cpt, $value);
 
         // Cell formats
-        if (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & CRM_Utils_Type::T_DATE) {
+        if (CRM_Utils_Array::value('type', $columnHeaders[$k]) & CRM_Utils_Type::T_DATE) {
           $objPHPExcel->getActiveSheet()
             ->getStyle($cells[$col] . $cpt)
             ->getNumberFormat()
@@ -122,7 +122,7 @@ class CRM_CiviExportExcel_Utils_SearchExport {
           // For eco-friendlyness, this should only be done once, perhaps when processing the headers initially
           $objPHPExcel->getActiveSheet()->getColumnDimension($cells[$col])->setAutoSize(true);
         }
-        elseif (CRM_Utils_Array::value('type', $form->_columnHeaders[$v]) & CRM_Utils_Type::T_MONEY) {
+        elseif (CRM_Utils_Array::value('type', $columnHeaders[$k]) & CRM_Utils_Type::T_MONEY) {
           $objPHPExcel->getActiveSheet()->getStyle($cells[$col])
             ->getNumberFormat()
             ->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_GENERAL);
