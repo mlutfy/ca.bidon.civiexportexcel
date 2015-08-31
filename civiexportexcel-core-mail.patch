@@ -1,0 +1,26 @@
+diff --git a/CRM/Report/Form.php b/CRM/Report/Form.php
+index 055e0d9..4c81bdc 100644
+--- a/CRM/Report/Form.php
++++ b/CRM/Report/Form.php
+@@ -2094,6 +2094,10 @@ WHERE cg.extends IN ('" . implode("','", $this->_customGroupExtends) . "') AND
+       $this->_outputMode = 'csv';
+       $this->_absoluteUrl = TRUE;
+     }
++    elseif ($output == 'excel2007') {
++      $this->assign('outputMode', 'excel2007');
++      $this->_outputMode = 'excel2007';
++    }
+     elseif ($this->_groupButtonName == $buttonName || $output == 'group') {
+       $this->assign('outputMode', 'group');
+       $this->_outputMode = 'group';
+@@ -2570,6 +2574,10 @@ WHERE cg.extends IN ('" . implode("','", $this->_customGroupExtends) . "') AND
+           );
+         }
+ 
++        if ($this->_outputMode == 'excel2007') {
++          civiexportexcel_attach_to_email($this, $rows, $attachments);
++        }
++
+         if (CRM_Report_Utils_Report::mailReport($content, $this->_id,
+             $this->_outputMode, $attachments
+           )) {

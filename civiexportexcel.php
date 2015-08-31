@@ -100,7 +100,6 @@ function civiexportexcel_civicrm_buildForm($formName, &$form) {
       $form->assign('printOnly', TRUE);
       $printOnly = TRUE;
       $form->assign('outputMode', 'excel2007');
-      // $form->_absoluteUrl = TRUE;
 
       // FIXME: this duplicates part of CRM_Report_Form::postProcess()
       // since we do not have a place to hook into, we hi-jack the form process
@@ -118,13 +117,17 @@ function civiexportexcel_civicrm_buildForm($formName, &$form) {
       $form->buildRows($sql, $rows);
 
       // format result set.
-      $form->formatDisplay($rows);
+      // This seems to cause more problems than it fixes.
+      // $form->formatDisplay($rows);
+
+      // Show stats on a second Excel page.
+      $stats = $form->statistics($rows);
 
       // assign variables to templates
       $form->doTemplateAssignment($rows);
       // FIXME: END.
 
-      CRM_CiviExportExcel_Utils_Report::export2excel2007($form, $rows);
+      CRM_CiviExportExcel_Utils_Report::export2excel2007($form, $rows, $stats);
     }
   }
 }
@@ -154,4 +157,27 @@ function civiexportexcel_civicrm_export($exportTempTable, $headerRows, $sqlColum
   $dao->free();
 
   CRM_CiviExportExcel_Utils_SearchExport::export2excel2007($headerRows, $sqlColumns, $rows);
+}
+
+/**
+ * Implements hook_civicrm_alterMailParams().
+ *
+ * Intercepts outgoing report emails, in order to attach the
+ * excel2007 version of the report.
+ *
+ * TODO: we should really propose a patch to CRM_Report_Form::endPostProcess().
+ */
+function civiexportexcel_attach_to_email(&$form, &$rows, &$attachments) {
+  $config = CRM_Core_Config::singleton();
+
+  $filename = 'CiviReport.xlsx';
+  $fullname = $config->templateCompileDir . CRM_Utils_File::makeFileName($filename);
+
+  CRM_CiviExportExcel_Utils_Report::generateFile($form, $rows, $fullname);
+
+  $attachments[] = array(
+    'fullPath' => $fullname,
+    'mime_type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'cleanName' => $filename,
+  );
 }

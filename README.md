@@ -8,14 +8,16 @@ easier to use).
 This extension uses the PHPExcel library. See the "License" section below
 for more information (LGPL v2).
 
-For discussion, see: http://forum.civicrm.org/index.php/topic,32954.0.html
+For discussion, see: http://forum.civicrm.org/index.php/topic,32954.0.html  
 See also the "Todo" section for a general roadmap.
 
-To download the latest version of this module:
+To download the latest version of this module:  
 https://github.com/mlutfy/ca.bidon.civiexportexcel
 
-This extension was sponsored by: Projet Montréal <http://projetmontreal.org>
-and Development and Peace <http://www.devp.org>.
+This extension was sponsored by:  
+Projet Montréal <http://projetmontreal.org>  
+Development and Peace <https://www.devp.org>  
+Coop SymbioTIC <https://www.symbiotic.coop>
 
 Requirements
 ============
@@ -33,42 +35,53 @@ Install as any other regular CiviCRM extension:
 
 2- Enable the extension from CiviCRM -> Administer -> System -> Extensions.
 
+3- If you wish to send emails with the report as an Excel attachment,
+   you must apply the patch in civiexportexcel-core-mail.patch.
+
+Report mails
+============
+
+To send report e-mails in Excel2007 format, use: "format=excel2007" in
+the "Scheduled Jobs" settings.
+
 Support
 =======
 
-Please post bug reports in the issue tracker of this project on github:
+Please post bug reports in the issue tracker of this project on github:  
 https://github.com/mlutfy/ca.bidon.civiexportexcel/issues
 
-For general questions and support, please post on the "Extensions" forum:
+For general questions and support, please post on the "Extensions" forum:  
 http://forum.civicrm.org/index.php/board,57.0.html
 
 This is a community contributed extension written thanks to the financial
 support of organisations using it, as well as the very helpful and collaborative
 CiviCRM community.
 
-If you appreciate this module, please consider donating 10$ to the CiviCRM project:
+If you appreciate this module, please consider donating 10$ to the CiviCRM project:  
 http://civicrm.org/participate/support-civicrm
 
 While I do my best to provide volunteer support for this extension, please
 consider financially contributing to support or development of this extension
 if you can.
 
-Commercial support via Coop SymbioTIC: <https://www.symbiotic.coop>
+Commercial support via Coop SymbioTIC:  
+<https://www.symbiotic.coop>
 
-Or you can send me the equivalent of a beer: <https://www.bidon.ca/en/paypal>
+Or you can send me the equivalent of a beer:  
+<https://www.bidon.ca/en/paypal>
 
 Todo
 ====
 
-* Support report e-mails (return the output of the xls, do not output directly as download).
-* Propose a new hook to CiviCRM for a cleaner postProcess implementation.
+* Propose a new hook to CiviCRM for a cleaner postProcess implementation (incl. mail).
 * Add OpenDocument (LibreOffice) support.
 * Add admin settings form to enable excel/opendocument formats?
+* Compare performance with tinybutstrong/tbs library?
 
 License
 =======
 
-(C) 2014 Mathieu Lutfy <mathieu@bidon.ca>
+(C) 2014-2015 Mathieu Lutfy <mathieu@bidon.ca>
 
 Distributed under the terms of the GNU Affero General public license (AGPL).
 See LICENSE.txt for details.

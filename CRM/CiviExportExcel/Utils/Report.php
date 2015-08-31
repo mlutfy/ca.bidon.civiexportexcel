@@ -2,9 +2,9 @@
 
 /**
  * @package civiexportexcel
- * @copyright Mathieu Lutfy (c) 2014
+ * @copyright Mathieu Lutfy (c) 2014-2015
  */
-class CRM_CiviExportExcel_Utils_Report {
+class CRM_CiviExportExcel_Utils_Report extends CRM_Core_Page {
 
   /**
    * Generates a XLS 2007 file and forces the browser to download it.
@@ -14,7 +14,7 @@ class CRM_CiviExportExcel_Utils_Report {
    *
    * See @CRM_Report_Utils_Report::export2csv().
    */
-  static function export2excel2007(&$form, &$rows) {
+  static function export2excel2007(&$form, &$rows, &$stats) {
     //Force a download and name the file using the current timestamp.
     $datetime = date('Ymd-Gi', $_SERVER['REQUEST_TIME']);
 
@@ -27,7 +27,7 @@ class CRM_CiviExportExcel_Utils_Report {
     // always modified
     header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 
-    echo self::makeCsv($form, $rows);
+    self::generateFile($form, $rows, $stats);
     CRM_Utils_System::civiExit();
   }
 
@@ -35,11 +35,13 @@ class CRM_CiviExportExcel_Utils_Report {
    * Utility function for export2csv and CRM_Report_Form::endPostProcess
    * - make XLS file content and return as string.
    *
-   * FIXME: return as string, not output directly.
+   * @param Object &$form CRM_Report_Form object.
+   * @param Array &$rows Resulting rows from the report.
+   * @param String Full path to the filename to write in (for mailing reports).
    *
    * See @CRM_Report_Utils_Report::makeCsv().
    */
-  static function makeCsv(&$form, &$rows) {
+  static function generateFile(&$form, &$rows, &$stats, $filename = 'php://output') {
     $config = CRM_Core_Config::singleton();
     $csv = '';
 
@@ -157,8 +159,26 @@ class CRM_CiviExportExcel_Utils_Report {
       $cpt++;
     }
 
+    // Add report statistics on a separate Excel sheet.
+    if (! empty($stats) && ! empty($stats['counts'])) {
+      $cpt = 0;
+
+      $objWorkSheet = $objPHPExcel->createSheet(1);
+      $objWorkSheet->setTitle(ts('Statistics'));
+
+      foreach ($stats['counts'] as $key => $val) {
+        $objWorkSheet
+          ->setCellValue('A' . $cpt, $val['title'])
+          ->setCellValue('B' . $cpt, $val['value']);
+
+        $cpt++;
+      }
+
+      $objWorkSheet->getColumnDimension('A')->setWidth(30);
+    }
+
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-    $objWriter->save('php://output');
+    $objWriter->save($filename);
 
     return ''; // FIXME
   }
