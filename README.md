@@ -19,6 +19,11 @@ Projet Montréal <http://projetmontreal.org>
 Development and Peace <https://www.devp.org>  
 Coop SymbioTIC <https://www.symbiotic.coop>
 
+Warnings
+========
+
+* This extension does not run the buildACLClause() function, meaning that you may have deleted contacts show up in some reports. If you are using ACLs in general, this can also cause important issues.
+
 Requirements
 ============
 
