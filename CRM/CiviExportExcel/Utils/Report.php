@@ -161,7 +161,7 @@ class CRM_CiviExportExcel_Utils_Report extends CRM_Core_Page {
 
     // Add report statistics on a separate Excel sheet.
     if (! empty($stats) && ! empty($stats['counts'])) {
-      $cpt = 0;
+      $cpt = 1;
 
       $objWorkSheet = $objPHPExcel->createSheet(1);
       $objWorkSheet->setTitle(ts('Statistics'));
