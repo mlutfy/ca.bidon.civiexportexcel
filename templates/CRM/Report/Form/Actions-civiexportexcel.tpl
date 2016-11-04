@@ -7,10 +7,30 @@
 
 {literal}
   <script>
-    cj(function() {
+    CRM.$(function($) {
       var form_id = '{/literal}{$form.$excel.id}{literal}';
-      var $dest = cj('input#{/literal}{$form.$csv.id}{literal}').parent();
-      cj('input#' + form_id).appendTo($dest);
+
+      {/literal}
+        {* CiviCRM 4.6 *}
+        {if $form.$csv.id}
+          {literal}
+            var $dest = $('input#{/literal}{$form.$csv.id}{literal}').parent();
+            $('input#' + form_id).appendTo($dest);
+          {/literal}
+        {else}
+          {* CiviCRM 4.7+ *}
+          {literal}
+            if ($('.crm-report-field-form-block .crm-submit-buttons').size() > 0) {
+              $('input#' + form_id).appendTo('.crm-report-field-form-block .crm-submit-buttons');
+            }
+            else {
+              // Do not show the button when running in a dashlet
+              // FIXME: we should probably just not add the HTML in the first place.
+              $('input#' + form_id).hide();
+            }
+          {/literal}
+        {/if}
+      {literal}
     });
   </script>
 {/literal}
