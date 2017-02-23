@@ -168,8 +168,8 @@ class CRM_CiviExportExcel_Utils_Report extends CRM_Core_Page {
 
       foreach ($stats['counts'] as $key => $val) {
         $objWorkSheet
-          ->setCellValue('A' . $cpt, $val['title'])
-          ->setCellValue('B' . $cpt, $val['value']);
+          ->setCellValue('A' . $cpt, @$val['title'])
+          ->setCellValue('B' . $cpt, @$val['value']);
 
         $cpt++;
       }
