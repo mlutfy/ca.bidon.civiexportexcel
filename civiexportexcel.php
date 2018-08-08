@@ -1,6 +1,7 @@
 <?php
 
 require_once 'civiexportexcel.civix.php';
+use CRM_Civiexportexcel_ExtensionUtil as E;
 
 /**
  * Implementation of hook_civicrm_config
@@ -83,7 +84,7 @@ function civiexportexcel_civicrm_buildForm($formName, &$form) {
 
     $form->_excelButtonName = $form->getButtonName('submit', 'excel');
 
-    $label = (! empty($vars['instanceId']) ? ts('Export to Excel') : ts('Preview Excel'));
+    $label = (! empty($vars['instanceId']) ? E::ts('Export to Excel') : E::ts('Preview Excel'));
     $form->addElement('submit', $form->_excelButtonName, $label);
 
     CRM_Core_Region::instance('page-body')->add(array(
