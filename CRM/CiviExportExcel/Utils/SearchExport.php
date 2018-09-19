@@ -107,8 +107,16 @@ class CRM_CiviExportExcel_Utils_SearchExport {
         // Remove HTML, unencode entities
         $value = html_entity_decode(strip_tags($value));
 
-        $objPHPExcel->getActiveSheet()
-          ->setCellValue($cells[$col] . $cpt, $value);
+        if (substr($value, 0, 1) == '=') {
+          // For 'copy of sent email' activities starting with '===', the lib detects those
+          // as incorrect formulas, which causes fatal errors.
+          $objPHPExcel->getActiveSheet()
+            ->setCellValueExplicit($cells[$col] . $cpt, $value, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+        }
+        else {
+          $objPHPExcel->getActiveSheet()
+            ->setCellValue($cells[$col] . $cpt, $value);
+        }
 
         // Cell formats
         if (CRM_Utils_Array::value('type', $columnHeaders[$k]) & CRM_Utils_Type::T_DATE) {
