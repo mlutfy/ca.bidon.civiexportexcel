@@ -83,7 +83,7 @@ class CRM_CiviExportExcel_Utils_Report extends CRM_Core_Page {
 
     // Replace internal header names with friendly ones, where available.
     foreach ($columnHeaders as $header) {
-      if (isset($form->_columnHeaders[$header])) {
+      if (isset($form->_columnHeaders[$header]) && isset($form->_columnHeaders[$header]['title'])) {
         $headers[] = html_entity_decode(strip_tags($form->_columnHeaders[$header]['title']));
       }
     }
@@ -168,8 +168,8 @@ class CRM_CiviExportExcel_Utils_Report extends CRM_Core_Page {
 
       foreach ($stats['counts'] as $key => $val) {
         $objWorkSheet
-          ->setCellValue('A' . $cpt, $val['title'])
-          ->setCellValue('B' . $cpt, $val['value']);
+          ->setCellValue('A' . $cpt, @$val['title'])
+          ->setCellValue('B' . $cpt, @$val['value']);
 
         $cpt++;
       }
